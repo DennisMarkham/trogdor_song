@@ -1,0 +1,39 @@
+<head></head>
+<body>
+	<button onclick = "sing()">Begin song</button>
+	<div id = "lyrics"></div>
+	<script>
+		var lyrics = ["I mean...", "He was a dragon man", "...", "Or maybe he was just a dragon!"]
+
+		function sing(){
+
+			i = 0
+
+			function song()
+			{
+				//this ensures there is no delay when showing the first line
+				setTimeout(rest_of_song, 1000)
+
+				document.getElementById("lyrics").innerText = "Trogdor was a man!"
+
+				function rest_of_song(){
+				//if the song is over
+				if(i == lyrics.length)
+				{
+					clearInterval(songInterval);
+				}
+				else
+				{
+					document.getElementById("lyrics").innerText = lyrics[i];
+					i++;
+				}
+			
+
+			const songInterval = setInterval(song, 1000)
+		}
+
+
+		}
+
+	</script>
+</body>

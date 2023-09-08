@@ -1,10 +1,12 @@
 <head></head>
 <body>
-	<button onclick = "song()">Begin song</button>
+	<button onclick = "song()" id = "start">Begin song</button>
 	<div id = "lyrics"></div>
 	<img id = "image" src = "play.png">
 	<script>
 		var stages = [
+		{lyrics: "TROGDOOOOOOR!!", pic: "dragon.png"},
+		{lyrics: "Trogdor was a man!", pic: "man.png"},
 		{lyrics: "I mean...", pic: "man.png"},
 		 {lyrics: "He was a dragon man", pic: "dragon_man.png"},
 		 {lyrics: "...", pic: "dragon_man.png"}, 
@@ -14,17 +16,34 @@
 
 			function song()
 			{
+
 				
+				const lyspace = document.getElementById("lyrics");
+				const imgspace = document.getElementById("image");
+				const start = document.getElementById("start");
+
+				start.toggleAttribute("disabled")
 
 				//this ensures there is no delay when showing the first line
-				const lyspace = document.getElementById("lyrics")
-				const imgspace = document.getElementById("image")
-				lyspace.innerText = "Trogdor was a man!"
-				imgspace.setAttribute("src", "man.png")
+				//beginning lyrics and pic (yes, he's supposed to say 'Trogdoooor' twice)
+				lyspace.innerText = "TROGDOOOOOOR!"
+				imgspace.setAttribute("src", "dragon.png")
 
 				const songInterval = setInterval(rest_of_song, 2000)
 
 				let i = 0
+
+				//having this function isn't useful yet, but if I put some kind of stop button
+				//it will be.
+				function reboot(){
+				clearInterval(songInterval);
+				lyspace.innerText = "";
+				imgspace.setAttribute("src", "play.png")
+
+				//the problem is I can't get this pesky undisabling to work
+				start.toggleAttribute("disabled");
+				}
+
 				function rest_of_song(){
 
 				//after the 1 second delay, can begin
@@ -32,9 +51,11 @@
 				//if the song is over
 				if(i == stages.length)
 				{
-					clearInterval(songInterval);
-				lyspace.innerText = "";
-				imgspace.setAttribute("src", "play.png")
+				
+				reboot()
+
+				//currently we have to rely on cruder methods to reset the button
+				//window.reload
 				}
 				else
 				{

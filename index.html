@@ -1,39 +1,59 @@
 <head></head>
 <body>
-	<button onclick = "sing()">Begin song</button>
+	<button onclick = "song()">Begin song</button>
 	<div id = "lyrics"></div>
+	<img id = "image" src = "play.png">
 	<script>
-		var lyrics = ["I mean...", "He was a dragon man", "...", "Or maybe he was just a dragon!"]
+		var stages = [
+		{lyrics: "I mean...", pic: "man.png"},
+		 {lyrics: "He was a dragon man", pic: "dragon_man.png"},
+		 {lyrics: "...", pic: "dragon_man.png"}, 
+		 {lyrics: "Or maybe he was just a dragon!", pic: "dragon.png"}
+		 ]
 
-		function sing(){
-
-			i = 0
 
 			function song()
 			{
+				
+
 				//this ensures there is no delay when showing the first line
-				setTimeout(rest_of_song, 1000)
+				const lyspace = document.getElementById("lyrics")
+				const imgspace = document.getElementById("image")
+				lyspace.innerText = "Trogdor was a man!"
+				imgspace.setAttribute("src", "man.png")
 
-				document.getElementById("lyrics").innerText = "Trogdor was a man!"
+				const songInterval = setInterval(rest_of_song, 2000)
 
+				let i = 0
 				function rest_of_song(){
+
+				//after the 1 second delay, can begin
+
 				//if the song is over
-				if(i == lyrics.length)
+				if(i == stages.length)
 				{
 					clearInterval(songInterval);
+				lyspace.innerText = "";
+				imgspace.setAttribute("src", "play.png")
 				}
 				else
 				{
-					document.getElementById("lyrics").innerText = lyrics[i];
+					lyspace.innerText = stages[i].lyrics;
+					imgspace.setAttribute("src", stages[i].pic)
 					i++;
 				}
 			
 
-			const songInterval = setInterval(song, 1000)
+			}
+
+			
+
+			
 		}
 
 
-		}
+		
+	
 
 	</script>
 </body>
